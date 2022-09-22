@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Pointeur;
+use App\Models\Pointage;
 use Illuminate\Http\Request;
 
-class PointeurController extends Controller
+class PointageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +13,7 @@ class PointeurController extends Controller
      */
     public function index()
     {
-        return Pointeur::all();
+        return Pointage::all();
     }
 
     /**
@@ -34,13 +34,14 @@ class PointeurController extends Controller
      */
     public function store(Request $request)
     {
-        $pointeur = new Pointeur;
-        $pointeur->firstName = $request->firstName;
-        $pointeur->lastName = $request->lastName;
-        $pointeur->email = $request->email;
-        $pointeur->phone = $request->phone;
-        $pointeur->save();
-        return ["response"=>"save valide"];
+        $pointage = new Pointage;
+        $pointage->pointeur_id = $request->pointeur_id;
+        $pointage->phone = $request->phone;
+        $pointage->Date=$request->Date;
+        $pointage->heurDarriver = $request->heurDarriver;
+        $pointage->heurDepart = $request->heurDepart;
+        $pointage->save();
+        return ["response"=>"pointage valide"];
     }
 
     /**
@@ -51,7 +52,7 @@ class PointeurController extends Controller
      */
     public function show($id)
     {
-        return Pointeur::find($id);
+        return Pointage::find($id);
     }
 
     /**
@@ -60,9 +61,9 @@ class PointeurController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function testPointage($date,$phone)
     {
-        //
+        return Pointage::where('Date','=',$date,'and')->where('phone','=',$phone)->get();
     }
 
     /**
@@ -74,14 +75,14 @@ class PointeurController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $pointeur=Pointeur::find($id);
-        $pointeur->firstName = $request->firstName;
-        $pointeur->lastName = $request->lastName;
-        $pointeur->email = $request->email;
-        $pointeur->phone = $request->phone;
-        $pointeur->save();
-        return ["response"=>"Pointeur was updated successfull"];
-
+        $pointage=Pointage::find($id);
+        $pointage->pointeur_id = $request->pointeur_id;
+        $pointage->phone = $request->phone;
+        $pointage->Date=$request->Date;
+        $pointage->heurDarriver = $request->heurDarriver;
+        $pointage->heurDepart = $request->heurDepart;
+        $pointage->save();
+        return ["response"=>"Pointer was updated successfully"];
     }
 
     /**
@@ -92,8 +93,11 @@ class PointeurController extends Controller
      */
     public function destroy($id)
     {
-        $pointeur=Pointeur::find($id);
-        $pointeur->delete();
-        return ["response"=>"pointeur was deleted sucessfull"];
+        $pointage=Pointage::find($id);
+        $pointage->delete();
+        return ["response"=>"pointage was deleted successfully"];
     }
+    // public function getAllPointageUser(){
+    //   return Pointage::join('pointeurs','pointages.pointeur_id','=','pointeurs.id')->get('pointeur*','pointage*');
+    // }
 }

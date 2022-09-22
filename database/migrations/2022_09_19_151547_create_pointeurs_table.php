@@ -17,7 +17,7 @@ class CreatePointeursTable extends Migration
             $table->bigincrements('id');
             $table->string('firstName');
             $table->string('lastName');
-            $table->string('email');
+            $table->string('email')->nullable();
             $table->string('phone');
             $table->timestamps();
         });

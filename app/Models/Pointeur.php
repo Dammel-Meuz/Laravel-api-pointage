@@ -8,6 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Pointeur extends Model
 {
     use HasFactory;
+    protected $fillable=[
+        'firstName',
+        'lastName',
+        'email',
+       ' phone'
+    ];
     public function pointages(){
         return $this->hasMany(Pointage::class);
     }

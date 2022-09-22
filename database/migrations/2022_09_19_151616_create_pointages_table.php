@@ -17,8 +17,9 @@ class CreatePointagesTable extends Migration
             $table->bigincrements('id');
             $table->foreignId('pointeur_id')->constrained();
             $table->string('phone');
+            $table->string('date');
             $table->string('heurDarriver');
-            $table->string('heurDepart');
+            $table->string('heurDepart')->nullable();
             $table->timestamps();
         });
     }
